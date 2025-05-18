@@ -1,4 +1,5 @@
 import { Editor } from '@/components/Editor/Editor';
+import { EditorStoreProvider } from '@/lib/stores/editorStore';
 //
 // interface DocumentPageProps {
 //   params: Promise<{ documentId: string }>;
@@ -12,11 +13,9 @@ const DocumentPage = async () => {
         'min-h-screen flex flex-col items-center justify-center bg-gray-200'
       }
     >
-      <Editor
-        options={{
-          content: 'something',
-        }}
-      />
+      <EditorStoreProvider>
+        <Editor />
+      </EditorStoreProvider>
     </section>
   );
 };

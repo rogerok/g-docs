@@ -12,16 +12,22 @@ import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import ImageResize from 'tiptap-extension-resize-image';
 
-import Image from '@tiptap/extension-image';
+import TipTapImage from '@tiptap/extension-image';
+import { useEditorStore } from '@/lib/stores/editorStore';
+import { observer } from 'mobx-react-lite';
+import { Toolbar } from '@/components/Editor/Toolbar';
 
 interface EditorProps {
   className?: string;
   options?: UseEditorOptions;
 }
 
-export const Editor: FC<EditorProps> = (props: EditorProps) => {
+export const Editor: FC<EditorProps> = observer((props: EditorProps) => {
+  const editorStore = useEditorStore();
+
   const editor = useEditor({
     ...props.options,
+    onCreate: (editor) => editorStore.init(editor.editor),
     extensions: [
       StarterKit,
       TaskList,
@@ -34,7 +40,7 @@ export const Editor: FC<EditorProps> = (props: EditorProps) => {
       TableRow,
       TableHeader,
       TableCell,
-      Image,
+      TipTapImage,
       ImageResize,
     ],
     immediatelyRender: false,
@@ -45,22 +51,22 @@ export const Editor: FC<EditorProps> = (props: EditorProps) => {
           'focus:outline-none print:border-0 bg-white border-2 flex flex-col min-h-[1054px] p-4 w-full cursor-text',
       },
     },
-    content: `<img src="https://source.unsplash.com/8xznAGy4HcY/800x400" />`,
   });
 
   return (
     <div
       className={
-        'size-full overflow-x-auto px-4 bg-accent print:p-0 print:bg-white print:overflow-visible'
+        'bg-accent size-full overflow-x-auto px-4 print:overflow-visible print:bg-white print:p-0'
       }
     >
+      <Toolbar />
       <div
         className={
-          'min-w-max justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0'
+          'mx-auto w-[816px] min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'
         }
       >
         <EditorContent editor={editor} />
       </div>
     </div>
   );
-};
+});
