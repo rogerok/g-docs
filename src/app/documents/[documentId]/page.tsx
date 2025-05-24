@@ -10,7 +10,7 @@ const DocumentPage = async () => {
   return (
     <section
       className={
-        'min-h-screen flex flex-col items-center justify-center bg-gray-200'
+        'flex min-h-screen flex-col items-center justify-center bg-gray-200'
       }
     >
       <EditorStoreProvider>

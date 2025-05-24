@@ -11,6 +11,7 @@ import Table from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import ImageResize from 'tiptap-extension-resize-image';
+import Underline from '@tiptap/extension-underline';
 
 import TipTapImage from '@tiptap/extension-image';
 import { useEditorStore } from '@/lib/stores/editorStore';
@@ -42,6 +43,7 @@ export const Editor: FC<EditorProps> = observer((props: EditorProps) => {
       TableCell,
       TipTapImage,
       ImageResize,
+      Underline,
     ],
     immediatelyRender: false,
     editorProps: {
